@@ -1,4 +1,5 @@
 import { InfoCard } from '@/components/InfoCard'
+import { MealsInfo } from '@/components/MealsInfo'
 import { Button } from '@/components/button'
 import { useAuth } from '@/contexts/auth-context'
 import { Plus } from 'lucide-react'
@@ -23,6 +24,8 @@ export function DashboardPage() {
       </div>
 
       <InfoCard />
+
+      <MealsInfo />
     </div>
   )
 }

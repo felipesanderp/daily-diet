@@ -1,4 +1,12 @@
-export function MealsInfo() {
+interface MealsInfoProps {
+  name: string
+  isOnTheDiet: number
+  mealDate: string
+}
+
+export function MealsInfo({ name, mealDate, isOnTheDiet }: MealsInfoProps) {
+  console.log(name)
+
   return (
     <div className="flex flex-1 flex-col p-14">
       <h1 className="text-2xl text-gray-500">Minhas refeições</h1>
@@ -16,7 +24,7 @@ export function MealsInfo() {
           </thead>
           <tbody>
             <tr className="bg-gray-700 text-sm/6 text-gray-100">
-              <td className="p-4 first:rounded-bl-lg">X burger</td>
+              <td className="p-4 first:rounded-bl-lg">{name}</td>
               <td>14/10/2023</td>
               <td>19:00</td>
               <td>Na dieta</td>

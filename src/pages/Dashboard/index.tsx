@@ -2,10 +2,12 @@ import { InfoCard } from '@/components/InfoCard'
 import { MealsInfo } from '@/components/MealsInfo'
 import { Button } from '@/components/button'
 import { useAuth } from '@/contexts/auth-context'
+import { useMeals } from '@/contexts/meals-context'
 import { Plus } from 'lucide-react'
 
 export function DashboardPage() {
   const { user } = useAuth()
+  const { meals } = useMeals()
 
   return (
     <div className="flex flex-col gap-12">
@@ -25,7 +27,20 @@ export function DashboardPage() {
 
       <InfoCard />
 
-      <MealsInfo />
+      {meals.length > 0 && (
+        <div>
+          {meals.map((meal) => {
+            return (
+              <MealsInfo
+                key={meal.id}
+                name={meal.name}
+                mealDate={meal.mealDate}
+                isOnTheDiet={meal.isOnTheDiet}
+              />
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }

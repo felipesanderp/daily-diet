@@ -1,5 +1,5 @@
 import { Equal, Frown, Smile } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
 interface Summary {
@@ -17,7 +17,7 @@ export function InfoCard() {
 
   const [cookies] = useCookies(['token'])
 
-  useEffect(() => {
+  useMemo(() => {
     async function getSummary() {
       const response = await fetch('http://localhost:3333/meals/summary', {
         method: 'GET',

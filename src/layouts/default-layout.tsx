@@ -1,13 +1,13 @@
 import { Sidebar } from '@/components/Sidebar'
-import { Outlet } from 'react-router-dom'
+import { useAuth } from '@/contexts/auth-context'
+import { Navigate, Outlet } from 'react-router-dom'
 
 export function DefaultLayout() {
-  // const navigate = useNavigate()
-  // const [cookies] = useCookies(['token'])
+  const { user } = useAuth()
 
-  // if (!cookies.token) {
-  //   navigate('/')
-  // }
+  if (!user) {
+    return <Navigate to={'/'} replace />
+  }
 
   return (
     <div className="min-h-screen justify-center lg:grid lg:grid-cols-app">

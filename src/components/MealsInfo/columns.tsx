@@ -39,6 +39,7 @@ export const columns: ColumnDef<Meal>[] = [
         {row.getValue('name')}
       </div>
     ),
+    enableHiding: false,
   },
   {
     accessorKey: 'description',
@@ -61,38 +62,24 @@ export const columns: ColumnDef<Meal>[] = [
 
       return (
         <div>
-          <span>
-            {/* {date.toLocaleDateString('pt-BR', {
-              hour: '2-digit',
-              minute: '2-digit',
-            })} */}
-            {date.toLocaleDateString('pt-BR')}
-          </span>
+          <span>{date.toLocaleDateString('pt-BR')}</span>
         </div>
       )
     },
   },
-  // {
-  //   accessorKey: 'mealDate',
-  //   header: ({ column }) => (
-  //     <DataTableColumnHeader column={column} title="Hora" />
-  //   ),
-  //   cell: ({ row }) => {
-  //     const date = new Date(row.getValue('mealDate'))
-
-  //     return (
-  //       <div>
-  //         <span>
-  //           {/* {date.toLocaleDateString('pt-BR', {
-  //             hour: '2-digit',
-  //             minute: '2-digit',
-  //           })} */}
-  //           {date.toLocaleTimeString('pt-BR')}
-  //         </span>
-  //       </div>
-  //     )
-  //   },
-  // },
+  {
+    accessorKey: 'mealHour',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Hora" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div>
+          <span>{row.getValue('mealHour')}</span>
+        </div>
+      )
+    },
+  },
   {
     accessorKey: 'isOnTheDiet',
     header: ({ column }) => (
@@ -119,6 +106,7 @@ export const columns: ColumnDef<Meal>[] = [
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
     },
+    enableHiding: false,
   },
   {
     id: 'actions',

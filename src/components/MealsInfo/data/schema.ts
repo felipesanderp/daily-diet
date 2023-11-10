@@ -6,6 +6,7 @@ export const mealSchema = z.object({
   description: z.string(),
   isOnTheDiet: z.number(),
   mealDate: z.string(),
+  mealHour: z.string(),
 })
 
 export type Meal = z.infer<typeof mealSchema>

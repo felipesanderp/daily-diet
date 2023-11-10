@@ -1,4 +1,4 @@
-import { ActionsTypes } from '@/reducers/meals/actions'
+import { ActionsTypes, removeMealAction } from '@/reducers/meals/actions'
 import { Meal, Summary, mealsReducer } from '@/reducers/meals/meals'
 import {
   ReactNode,
@@ -12,6 +12,7 @@ import { useCookies } from 'react-cookie'
 interface MealsContextType {
   meals: Meal[]
   summary: Summary
+  removeTask: (id: string) => Promise<boolean>
 }
 
 interface MealsContextProps {
@@ -74,10 +75,27 @@ export function MealsProvider({ children }: MealsContextProps) {
     }
 
     getSummary()
-  }, [cookies.token])
+  }, [cookies.token, meals])
+
+  async function removeTask(id: string) {
+    const response = await fetch(`http://localhost:3333/meals/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${cookies.token}`,
+      },
+    })
+
+    if (!response.ok) {
+      return false
+    }
+
+    dispatch(removeMealAction(id))
+
+    return true
+  }
 
   return (
-    <MealsContext.Provider value={{ meals, summary }}>
+    <MealsContext.Provider value={{ meals, summary, removeTask }}>
       {children}
     </MealsContext.Provider>
   )

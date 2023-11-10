@@ -1,5 +1,5 @@
 import { LogOut } from 'lucide-react'
-import { Button } from '../button'
+import { Button } from '../ui/button'
 import { useAuth } from '@/contexts/auth-context'
 
 export function Profile() {

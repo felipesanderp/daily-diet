@@ -1,6 +1,6 @@
 import { InfoCard } from '@/components/InfoCard'
-import { MealsInfo } from '@/components/MealsInfo'
-import { Button } from '@/components/button'
+import { MealsInfoTable } from '@/components/MealsInfo'
+import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/auth-context'
 import { Plus } from 'lucide-react'
 
@@ -17,7 +17,7 @@ export function DashboardPage() {
           <span className="text-zinc-500">Gerencie suas refeições.</span>
         </div>
 
-        <Button variant="primary" className="flex items-center gap-2">
+        <Button variant="default" className="flex items-center gap-2">
           <Plus />
           Nova refeição
         </Button>
@@ -25,7 +25,7 @@ export function DashboardPage() {
 
       <InfoCard />
 
-      <MealsInfo />
+      <MealsInfoTable />
     </div>
   )
 }

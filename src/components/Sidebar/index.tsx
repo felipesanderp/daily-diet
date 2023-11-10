@@ -4,7 +4,7 @@ import { Home, Menu, User } from 'lucide-react'
 import { Logo } from './logo'
 import { NavItem } from './nav-item'
 import { Profile } from './profile'
-import { Button } from '../button'
+import { Button } from '../ui/button'
 
 export function Sidebar() {
   return (

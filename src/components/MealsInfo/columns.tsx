@@ -120,4 +120,8 @@ export const columns: ColumnDef<Meal>[] = [
       return value.includes(row.getValue(id))
     },
   },
+  {
+    id: 'actions',
+    cell: ({ row }) => <DataTableRowActions row={row} />,
+  },
 ]

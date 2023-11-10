@@ -17,27 +17,27 @@ export function InfoCard() {
 
   const [cookies] = useCookies(['token'])
 
-  useMemo(() => {
-    async function getSummary() {
-      const response = await fetch('http://localhost:3333/meals/summary', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${cookies.token}`,
-        },
-      })
+  // useMemo(() => {
+  //   async function getSummary() {
+  //     const response = await fetch('http://localhost:3333/meals/summary', {
+  //       method: 'GET',
+  //       headers: {
+  //         Authorization: `Bearer ${cookies.token}`,
+  //       },
+  //     })
 
-      const summaryResponse = await response.json()
+  //     const summaryResponse = await response.json()
 
-      setSummary({
-        ...summary,
-        totalMeals: summaryResponse.summary.totalMeals,
-        totalOnTheDiet: summaryResponse.summary.totalOnTheDiet,
-        totalOutsideTheDiet: summaryResponse.summary.totalOutsideTheDiet,
-      })
-    }
+  //     setSummary({
+  //       ...summary,
+  //       totalMeals: summaryResponse.summary.totalMeals,
+  //       totalOnTheDiet: summaryResponse.summary.totalOnTheDiet,
+  //       totalOutsideTheDiet: summaryResponse.summary.totalOutsideTheDiet,
+  //     })
+  //   }
 
-    getSummary()
-  }, [cookies.token, summary])
+  //   getSummary()
+  // }, [cookies.token, summary])
 
   const isOnTheDietPercentage = Math.round(
     (summary.totalOnTheDiet / summary.totalMeals) * 100,

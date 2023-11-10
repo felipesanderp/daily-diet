@@ -29,25 +29,27 @@ export function MealsProvider({ children }: MealsContextProps) {
   const { meals } = mealsState
 
   useEffect(() => {
-    async function getMeals() {
-      const response = await fetch('http://localhost:3333/meals', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${cookies.token}`,
-        },
-      })
+    if (cookies.token) {
+      async function getMeals() {
+        const response = await fetch('http://localhost:3333/meals', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${cookies.token}`,
+          },
+        })
 
-      const data = await response.json()
+        const data = await response.json()
 
-      dispatch({
-        type: ActionsTypes.GET_USER_MEALS,
-        payload: {
-          data,
-        },
-      })
+        dispatch({
+          type: ActionsTypes.GET_USER_MEALS,
+          payload: {
+            data: data.meals,
+          },
+        })
+      }
+
+      getMeals()
     }
-
-    getMeals()
   }, [cookies.token])
 
   return (

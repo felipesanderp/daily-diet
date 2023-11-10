@@ -1,5 +1,5 @@
 import { ActionsTypes } from '@/reducers/meals/actions'
-import { Meal, mealsReducer } from '@/reducers/meals/meals'
+import { Meal, Summary, mealsReducer } from '@/reducers/meals/meals'
 import {
   ReactNode,
   createContext,
@@ -11,6 +11,7 @@ import { useCookies } from 'react-cookie'
 
 interface MealsContextType {
   meals: Meal[]
+  summary: Summary
 }
 
 interface MealsContextProps {
@@ -22,11 +23,12 @@ export const MealsContext = createContext({} as MealsContextType)
 export function MealsProvider({ children }: MealsContextProps) {
   const [mealsState, dispatch] = useReducer(mealsReducer, {
     meals: [],
+    summary: {},
   })
 
   const [cookies] = useCookies(['token'])
 
-  const { meals } = mealsState
+  const { meals, summary } = mealsState
 
   useEffect(() => {
     if (cookies.token) {
@@ -52,8 +54,32 @@ export function MealsProvider({ children }: MealsContextProps) {
     }
   }, [cookies.token])
 
+  useEffect(() => {
+    async function getSummary() {
+      const response = await fetch('http://localhost:3333/meals/summary', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${cookies.token}`,
+        },
+      })
+
+      const data = await response.json()
+
+      dispatch({
+        type: ActionsTypes.GET_USER_MEALS_SUMMARY,
+        payload: {
+          data: data.summary,
+        },
+      })
+    }
+
+    getSummary()
+  }, [cookies.token])
+
   return (
-    <MealsContext.Provider value={{ meals }}>{children}</MealsContext.Provider>
+    <MealsContext.Provider value={{ meals, summary }}>
+      {children}
+    </MealsContext.Provider>
   )
 }
 

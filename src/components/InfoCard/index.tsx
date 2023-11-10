@@ -1,43 +1,8 @@
+import { useMeals } from '@/contexts/meals-context'
 import { Equal, Frown, Smile } from 'lucide-react'
-import { useMemo, useState } from 'react'
-import { useCookies } from 'react-cookie'
-
-interface Summary {
-  totalMeals: number
-  totalOnTheDiet: number
-  totalOutsideTheDiet: number
-}
 
 export function InfoCard() {
-  const [summary, setSummary] = useState<Summary>({
-    totalMeals: 0,
-    totalOnTheDiet: 0,
-    totalOutsideTheDiet: 0,
-  })
-
-  const [cookies] = useCookies(['token'])
-
-  // useMemo(() => {
-  //   async function getSummary() {
-  //     const response = await fetch('http://localhost:3333/meals/summary', {
-  //       method: 'GET',
-  //       headers: {
-  //         Authorization: `Bearer ${cookies.token}`,
-  //       },
-  //     })
-
-  //     const summaryResponse = await response.json()
-
-  //     setSummary({
-  //       ...summary,
-  //       totalMeals: summaryResponse.summary.totalMeals,
-  //       totalOnTheDiet: summaryResponse.summary.totalOnTheDiet,
-  //       totalOutsideTheDiet: summaryResponse.summary.totalOutsideTheDiet,
-  //     })
-  //   }
-
-  //   getSummary()
-  // }, [cookies.token, summary])
+  const { summary } = useMeals()
 
   const isOnTheDietPercentage = Math.round(
     (summary.totalOnTheDiet / summary.totalMeals) * 100,

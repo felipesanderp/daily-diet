@@ -17,7 +17,7 @@ export function DashboardPage() {
           <span className="text-zinc-500">Gerencie suas refeições.</span>
         </div>
 
-        <Button variant="default" className="flex items-center gap-2">
+        <Button variant="primary" className="flex items-center gap-2">
           <Plus />
           Nova refeição
         </Button>

@@ -2,12 +2,12 @@ import { BadgeCheck, BadgeX } from 'lucide-react'
 
 export const statuses = [
   {
-    value: 'onTheDiet',
+    value: 1,
     label: 'Na dieta',
     icon: BadgeCheck,
   },
   {
-    value: 'offTheDiet',
+    value: 0,
     label: 'Fora da Dieta',
     icon: BadgeX,
   },
